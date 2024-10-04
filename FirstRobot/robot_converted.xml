@@ -1,0 +1,84 @@
+<mujoco model="onshape">
+  <compiler angle="radian"/>
+
+  <asset>
+    <mesh name="mainbody" file="mainbody.stl"/>
+    <mesh name="arm1" file="arm1.stl"/>
+    <mesh name="armtwo" file="armtwo.stl"/>
+  </asset>
+
+  <option gravity="0 0 -9.81" timestep="0.001" iterations="5000">
+
+   </option>
+       
+       
+       
+
+
+  <worldbody>
+
+  <geom name="floor" type="plane" pos="0 0 0" size="10 10 1" rgba="0.8 0.8 0.8 1" friction="1.0 0.2 0.0001" />
+
+      <body name="main_body" pos="0 0 0.2">
+      <freejoint name="root"/>
+    <geom pos="0 0 -0.03" quat="1 0 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="mainbody"/>
+    <body name="arm1" pos="-0.1 -0.033 0" quat="0 0 0.707107 -0.707107">
+      <inertial pos="0.05 0 -0.028" quat="0.5 0.5 0.5 0.5" mass="0.0533512" diaginertia="0.000122942 9.6728e-05 4.7685e-05"/>
+      <joint name="main1" pos="0 0 0" axis="0 0 1" range="-0.523599 0.523599" actuatorfrcrange="-20 20" damping="5"/>
+      <geom pos="0.05 0 -0.053" quat="1 0 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="arm1"/>
+      <body name="armtwo" pos="0.1 0 -0.003" quat="1 0 0 0">
+        <inertial pos="0.055 0 -0.025" quat="0.5 0.5 0.5 0.5" mass="0.0616042" diaginertia="0.000184306 0.000166397 3.52013e-05"/>
+        <joint name="elbow4" pos="0 0 0" axis="0 0 1" range="-1.0472 1.0472" actuatorfrcrange="-20 20" damping="5"/>
+        <geom pos="0.11 0 -0.003" quat="0 1 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="armtwo"/>
+      </body>
+    </body>
+    <body name="arm1_2" pos="0.033 -0.1 0" quat="0.5 0.5 0.5 0.5">
+      <inertial pos="-0.05 0 -0.028" quat="0.5 0.5 0.5 0.5" mass="0.0533512" diaginertia="0.000122942 9.6728e-05 4.7685e-05"/>
+      <joint name="main2" pos="0 0 0" axis="0 0 1" range="-0.523599 0.523599" actuatorfrcrange="-20 20" damping="5"/>
+      <geom pos="-0.05 0 -0.053" quat="1 0 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="arm1"/>
+      <body name="armtwo_2" pos="-0.1 0 -0.003" quat="1 0 0 0">
+        <inertial pos="-0.055 0 -0.025" quat="0.5 0.5 0.5 0.5" mass="0.0616042" diaginertia="0.000184306 0.000166397 3.52013e-05"/>
+        <joint name="elbow3" pos="0 0 0" axis="0 0 1" range="-1.0472 1.0472" actuatorfrcrange="-20 20" damping="5"/>
+        <geom pos="0 0 -0.003" quat="0 1 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="armtwo"/>
+      </body>
+    </body>
+    <body name="arm1_3" pos="0.1 0.033 0" quat="0 0 -0.707107 -0.707107">
+      <inertial pos="-0.05 0 -0.028" quat="0.5 0.5 0.5 0.5" mass="0.0533512" diaginertia="0.000122942 9.6728e-05 4.7685e-05"/>
+      <joint name="main3" pos="0 0 0" axis="0 0 1" range="-0.523599 0.523599" actuatorfrcrange="-20 20" damping="5"/>
+      <geom pos="-0.05 0 -0.053" quat="1 0 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="arm1"/>
+      <body name="armtwo_3" pos="-0.1 0 -0.003" quat="1 0 0 0">
+        <inertial pos="-0.055 0 -0.025" quat="0.5 0.5 0.5 0.5" mass="0.0616042" diaginertia="0.000184306 0.000166397 3.52013e-05"/>
+        <joint name="elbow2" pos="0 0 0" axis="0 0 1" range="-1.0472 1.0472" actuatorfrcrange="-20 20" damping="5"/>
+        <geom pos="0 0 -0.003" quat="0 1 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="armtwo"/>
+      </body>
+    </body>
+    <body name="arm1_4" pos="-0.033 0.1 0" quat="0.5 0.5 -0.5 -0.5">
+      <inertial pos="-0.05 0 -0.028" quat="0.5 0.5 0.5 0.5" mass="0.0533512" diaginertia="0.000122942 9.6728e-05 4.7685e-05"/>
+      <joint name="main4" pos="0 0 0" axis="0 0 1" range="-0.523599 0.523599" actuatorfrcrange="-20 20" damping="5"/>
+      <geom pos="-0.05 0 -0.053" quat="1 0 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="arm1"/>
+      <body name="armtwo_4" pos="-0.1 0 -0.003" quat="0.00320708 0 0 0.999995">
+        <inertial pos="0.055 0 -0.025" quat="0.5 0.5 0.5 0.5" mass="0.0616042" diaginertia="0.000184306 0.000166397 3.52013e-05"/>
+        <joint name="elbow1" pos="0 0 0" axis="0 0 1" range="-1.0472 1.0472" actuatorfrcrange="-20 20" damping="5"/>
+        <geom pos="0.11 0 -0.003" quat="0 1 0 0" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="armtwo"/>
+      </body>
+    </body>
+    </body> 
+  </worldbody>
+
+
+<actuator>
+    <!-- Position-controlled motors for the main joints -->
+    <position joint="main1" ctrllimited="true" ctrlrange="-0.523599 0.523599" kp="100" timeconst="0.1"/>
+    <position joint="elbow4" ctrllimited="true" ctrlrange="-1.0472 1.0472" kp="100" timeconst="0.1"/>
+    <position joint="main2" ctrllimited="true" ctrlrange="-0.523599 0.523599" kp="100" timeconst="0.1"/>
+    <position joint="elbow3" ctrllimited="true" ctrlrange="-1.0472 1.0472" kp="100" timeconst="0.1"/>
+    <position joint="main3" ctrllimited="true" ctrlrange="-0.523599 0.523599" kp="100" timeconst="0.1"/>
+    <position joint="elbow2" ctrllimited="true" ctrlrange="-1.0472 1.0472" kp="100" timeconst="0.1"/>
+    <position joint="main4" ctrllimited="true" ctrlrange="-0.523599 0.523599" kp="100" timeconst="0.1"/>
+    <position joint="elbow1" ctrllimited="true" ctrlrange="-1.0472 1.0472" kp="100" timeconst="0.1"/>
+
+
+</actuator>
+
+
+</mujoco>
