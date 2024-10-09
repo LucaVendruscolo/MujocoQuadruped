@@ -52,46 +52,40 @@ class WalkingRobotEnv(Env):
         self.total_substeps = 0
         self.start_time = time.perf_counter()
 
-        self.is_raising = True  # Start by rewarding upward motion
+        self.is_raising = True  
         self.last_body_z_pos = 0
 
-        self.steps_in_current_cycle = 0  # To count steps in the current cycle
-        self.total_cycles = 0  # To count how many cycles have been completed
+        self.steps_in_current_cycle = 0  
+        self.total_cycles = 0  
         self.total_steps_in_all_cycles = 0 
 
     def step(self, action):
         action = np.clip(action, self.action_space.low, self.action_space.high)
         self.data.ctrl[:] = self.torque_limit * action
 
-        substeps = 200  # Number of substeps
-        target_time_per_frame = 1.0 / self.target_fps  # Time per frame based on target FPS
+        substeps = 200  
+        target_time_per_frame = 1.0 / self.target_fps 
 
         for _ in range(substeps):
-            # Start timing for each substep (treated as a frame)
+     
             start_time = time.perf_counter()
 
-            mujoco.mj_step(self.model, self.data)  # Step through simulation
-            self.stepCount += 1  # Each substep counts as a step/frame
+            mujoco.mj_step(self.model, self.data)  
+            self.stepCount += 1 
             
 
             if self.Togglerender:
                 self.render()
 
-                # End timing for each substep
                 end_time = time.perf_counter()
 
-                # Calculate elapsed time for the substep
                 elapsed_time = end_time - start_time
 
-                # If the elapsed time is less than the target frame time, sleep for the remaining time
                 if elapsed_time < target_time_per_frame:
                     time.sleep(target_time_per_frame - elapsed_time)
 
-                # Calculate and print the actions per second after each substep
                 actions_per_second = 1 / (time.perf_counter() - start_time)
-                #print(f"Actions per second: {actions_per_second:.2f}",  self.data.qpos[2])
 
-        # Gather observation and calculate reward after all substeps
         obs = np.concatenate([self.data.qpos, self.data.qvel])
         reward = self.compute_reward()
         done = self.is_done()
@@ -140,18 +134,15 @@ class WalkingRobotEnv(Env):
     def is_done(self):
         forward_distance = self.data.qpos[0]
         
-        # If the episode is finished (reaching a distance or step limit)
         if self.stepCount > 500000 or forward_distance >= 10.0 or forward_distance <= -10.0:
             self.stepCount = 0 
             self.maxForwardDisplacement = 0
             self.totReward = 0
 
-            # Calculate average steps per cycle
             if self.total_cycles > 0:
                 avg_steps_per_cycle = self.total_steps_in_all_cycles / self.total_cycles
                 print(f"Average steps per up-down cycle: {avg_steps_per_cycle:.2f}")
 
-            # Reset counters for the next episode
             self.total_cycles = 0
             self.total_steps_in_all_cycles = 0
             self.steps_in_current_cycle = 0
@@ -188,9 +179,9 @@ class WalkingRobotEnv(Env):
         mujoco.mj_resetData(self.model, self.data)
         self.maxForwardDisplacement = 0
         self.stepCount = 0
-        self.is_raising = True  # Reset to raising mode
-        self.max_body_z_pos = self.data.qpos[2]  # Initialize to the current position
-        self.min_body_z_pos = self.data.qpos[2]  # Initialize to the current position
+        self.is_raising = True 
+        self.max_body_z_pos = self.data.qpos[2] 
+        self.min_body_z_pos = self.data.qpos[2] 
         return np.concatenate([self.data.qpos, self.data.qvel])
     
 
