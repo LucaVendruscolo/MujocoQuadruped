@@ -13,7 +13,7 @@ class WalkingRobotEnv(Env):
         if not glfw.init():
             raise Exception("Failed to initialize GLFW")
         
-        self.Togglerender = False
+        self.Togglerender = True
 
         if self.Togglerender:
             self.window = glfw.create_window(1200, 900, "MuJoCo Walking Robot", None, None)
